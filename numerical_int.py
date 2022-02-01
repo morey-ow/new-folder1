@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+gitimport matplotlib.pyplot as plt
 import numpy as np
 
 def integrate(f, interval, init_condition=0):
@@ -17,7 +17,7 @@ def graph(x, y):
 	ax.plot(x,y)
 	fig.show()
 
-def function_chopped(f, interval):
+def function_values(f, interval):
 	''' given a function f like f(x)=x^3
 	we return the list f(interval)'''
 	return [f(i) for i in interval]
@@ -33,4 +33,5 @@ if __name__=='__main__':
 	f=[i+1 for i in interval]
 	F=integrate(f, interval )
 	ax.plot(interval, F)
-	ax.plot(interval, function_to_interval(lambda x: x**2/2, interval))
+	ax.plot(interval, function_values(lambda x: x**2/2, interval))
+	
