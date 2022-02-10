@@ -1,7 +1,6 @@
 from matplotlib import animation
 from matplotlib.pyplot import savefig
-from numpy import linspace
-from numerical_int import *
+
 from my_anim import *
 
 t=np.linspace(0,10,101)
