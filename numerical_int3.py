@@ -1,7 +1,7 @@
 #In this file, we implememnt forward euler for vector valued function u, with du/dt = f(u,t)`
 #so f is vector valued to
 
-
+#%%
 import matplotlib.pyplot as plt
 import numpy as np
 import sympy as sym  #symbolic python
@@ -12,7 +12,7 @@ from scipy.integrate import solve_ivp
 # https://www.skytowner.com/explore/getting_started_with_matplotlib
 # to understand object oriented matplotlib
 # I used some ideas from Greg Winther's implementation of
-# forward_eiler at https://youtu.be/CIERyk_36lk
+# forward_euler at https://youtu.be/CIERyk_36lk
 
 
 def forward_euler(f, interval, init_condition): #here f(u,t):R^d X R \to R^d  is a vector valued function
@@ -44,9 +44,11 @@ if __name__=='__main__':
 	# so du/dt=(y',y'')=(y', -y) since y''=-y for our particular equation.
 
 	def f(u, t):
-		return np.asarray([u[1], -u[0]])	
+		return np.asarray([u[1], -u[0]])
+
+
 	fig1=plt.figure('Figure 1', figsize=(8,10))
-	ax=fig1.add_subplot()
+	ax=plt.axes()
 	
 	for n,c in [(6000,'r'), (1000, 'g') ]:
 		interval=np.linspace(a,b,n)
@@ -69,12 +71,15 @@ if __name__=='__main__':
 	plt.xlabel('t')
 	plt.ylabel('F(t)')
 	
+	#%%
+
 	#comparison with scipy's initial value problems solver solve_ivp
 	def f_switch(t,u):  #switch the u,t order to conform to solve_ivp
 		return f(u,t)
-	sol=solve_ivp(f, [a,b], [0,1])
-	ax.plot(sol.t, sol.y[0], 'ro', linewidth=2, label='scipy solve_ivp solution')
+	sol=solve_ivp(f_switch, [a,b], [0,1])
+	ax.plot(sol.t, sol.y[0], 'r', linewidth=2, label='scipy solve_ivp solution')
 	plt.show()
 	
 	fig1.savefig('graph.png')
 	
+# %%
